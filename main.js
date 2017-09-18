@@ -12,7 +12,6 @@ searchEntered.addEventListener("keyup", function(e){
         resultsExist = true;
         hideElements(searchbox);
         var completeUrl = url + searchEntered.value + urlEnd;
-        console.log(completeUrl);
         var request = new XMLHttpRequest();
         request.open("GET", completeUrl, true);
         request.onload = function() {
