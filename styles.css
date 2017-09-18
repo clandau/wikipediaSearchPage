@@ -11,7 +11,7 @@ a:link {
 
 ul
 {
-list-style-type: none;
+    list-style-type: none;
 }
 
 a:hover, :visited {
@@ -65,7 +65,7 @@ input:focus {
 }
 
 /*results boxes cs*/
- .flex-container {
+.flex-container {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -78,5 +78,4 @@ input:focus {
   
    flex-flow: row wrap; 
   justify-content: space-around; 
-} 
-        
+}     
