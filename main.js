@@ -6,6 +6,7 @@ var clearButtonVisible = false;
 var clearButton = document.getElementById('clrBtn');
 var resultsList = document.getElementById('output');
 var searchbox = document.getElementById('searchbox-div');
+var parentDiv = document.getElementById('parent-div');
 
 searchEntered.addEventListener("keyup", function(e){
     if (e.which === 13 && searchEntered.value) {  //checks whether key was enter key

@@ -5,6 +5,11 @@ body {
     margin: 0;
 }
 
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
 a:link {
     color: #A38424;
 }
@@ -17,11 +22,6 @@ ul
 a:hover, :visited {
     color: #544312;
     text-decoration: none;
-}
-
-.wrapper {
-    width: 100%;
-    margin: 0 auto;
 }
 
 #parent-div {
@@ -44,7 +44,7 @@ a:hover, :visited {
 }
 
 #searchbox { 
-    width: 100%;
+    width: 200px;
 	padding: 6px 10px;
 	background: no-repeat 200px 4px; 
     border-color: black;
