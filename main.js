@@ -7,6 +7,7 @@ var clearButton = document.getElementById('clrBtn');
 var resultsList = document.getElementById('output');
 var searchbox = document.getElementById('searchbox-div');
 var parentDiv = document.getElementById('parent-div');
+var mainWrapper = document.getElementById('mainWrapper');
 
 searchEntered.addEventListener("keyup", function(e){
     if (e.which === 13 && searchEntered.value) {  //checks whether key was enter key
@@ -19,6 +20,7 @@ searchEntered.addEventListener("keyup", function(e){
             if (request.status >= 200 && request.status<400) {
                 var returnData = JSON.parse(request.responseText);
                 renderHTML(returnData);  //output results
+                mainWrapper.style.marginTop = '0px';
                 clearButton.style.display = null;
                 clearButtonVisible = true;
             }
@@ -66,5 +68,7 @@ clearButton.addEventListener('click', function() {
             hideElements(clearButton);     //hide clear button
             searchbox.style.display = 'block';   //put the search box back on the page
             searchEntered.value = null;          //clear the contents of the search box
+            mainWrapper.style.marginTop = '100px';
+            //move the position down
         }
 });
