@@ -1,24 +1,25 @@
-var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch="
-var urlEnd = "&srprop=snippet&origin=*";
-var searchEntered = document.getElementById("searchbox");
-var resultsExist = false;  //identifies whether results are already on page for button handler
-var clearButtonVisible = false;
-var clearButton = document.getElementById('clrBtn');
-var resultsList = document.getElementById('output');
-var searchbox = document.getElementById('searchbox-div');
-var parentDiv = document.getElementById('parent-div');
-var mainWrapper = document.getElementById('mainWrapper');
+
+const url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch="
+const urlEnd = "&srprop=snippet&origin=*";
+const searchEntered = document.getElementById("searchbox");
+const clearButton = document.getElementById('clrBtn');
+const resultsList = document.getElementById('output');
+const searchbox = document.getElementById('searchbox-div');
+const parentDiv = document.getElementById('parent-div');
+const mainWrapper = document.getElementById('mainWrapper');
+let resultsExist = false;  
+let clearButtonVisible = false;
 
 searchEntered.addEventListener("keyup", function(e){
-    if (e.which === 13 && searchEntered.value) {  //checks whether key was enter key
+    if (e.which === 13 && searchEntered.value) { 
         resultsExist = true;
         hideElements(searchbox);
-        var completeUrl = url + searchEntered.value + urlEnd;
-        var request = new XMLHttpRequest();
+        let completeUrl = url + searchEntered.value + urlEnd;
+        let request = new XMLHttpRequest();
         request.open("GET", completeUrl, true);
         request.onload = function() {
             if (request.status >= 200 && request.status<400) {
-                var returnData = JSON.parse(request.responseText);
+                let returnData = JSON.parse(request.responseText);
                 renderHTML(returnData);  //output results
                 mainWrapper.style.marginTop = '0px';
                 clearButton.style.display = null;
@@ -39,13 +40,13 @@ request.send();
 
 //handle data from API and display search results
 function renderHTML(data) {
-    var resultsNum = data.query.search.length;
-    var url = "https://en.wikipedia.org/wiki/";
-    var getListElem = document.getElementById("output");
-    for (var i=0; i<resultsNum; i++) {
-        var newLi = document.createElement("li");
+    let resultsNum = data.query.search.length;
+    let url = "https://en.wikipedia.org/wiki/";
+    let getListElem = document.getElementById("output");
+    for (let i=0; i<resultsNum; i++) {
+        let newLi = document.createElement("li");
         newLi.id = "item" + i;
-        var title = data.query.search[i].title;
+        let title = data.query.search[i].title;
         newLi.innerHTML += "<h3><a href='" + url + title + "'target='_blank'>" + title + "</a></h3>";
         newLi.innerHTML += '<p>' + data.query.search[i].snippet;
         getListElem.appendChild(newLi);
@@ -53,10 +54,11 @@ function renderHTML(data) {
 }
 
 function hideElements(loc) {
-    if (loc.style.display === 'none') {
-        loc.style.display = 'block';
-    }
-        loc.style.display = 'none';
+    loc.style.display === 'none' ? loc.style.display = 'block' : loc.style.display = 'none';
+    // if (loc.style.display === 'none') {
+    //     loc.style.display = 'block';
+    // }
+    //     loc.style.display = 'none';
 }
 
 clearButton.addEventListener('click', function() {
