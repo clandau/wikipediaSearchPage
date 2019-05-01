@@ -55,7 +55,6 @@ function renderHTML(data) {
 function hideElements(loc) {
     if (loc.style.display === 'none') {
         loc.style.display = 'block';
-        console.log("this was called " + loc);
     }
         loc.style.display = 'none';
 }
