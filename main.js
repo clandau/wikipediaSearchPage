@@ -4,6 +4,7 @@ const urlEnd = "&srprop=snippet&origin=*";
 const searchEntered = document.getElementById("searchbox");
 const clearButton = document.getElementById('clrBtn');
 const resultsList = document.getElementById('output');
+const errorDiv = document.getElementById('error');
 const searchbox = document.getElementById('searchbox-div');
 const parentDiv = document.getElementById('parent-div');
 const mainWrapper = document.getElementById('mainWrapper');
@@ -41,16 +42,22 @@ request.send();
 //handle data from API and display search results
 function renderHTML(data) {
     let resultsNum = data.query.search.length;
-    let url = "https://en.wikipedia.org/wiki/";
-    let getListElem = document.getElementById("output");
-    for (let i=0; i<resultsNum; i++) {
-        let newLi = document.createElement("li");
-        newLi.id = "item" + i;
-        let title = data.query.search[i].title;
-        newLi.innerHTML += "<h3><a href='" + url + title + "'target='_blank'>" + title + "</a></h3>";
-        newLi.innerHTML += '<p>' + data.query.search[i].snippet;
-        getListElem.appendChild(newLi);
+    if(resultsNum === 0) {
+        console.log('no results found');
+        errorDiv.innerHTML="<h3>No results found.</h3>";
+        }
+    else {
+        let url = "https://en.wikipedia.org/wiki/";
+        for (let i=0; i<resultsNum; i++) {
+            let newLi = document.createElement("li");
+            newLi.id = "item" + i;
+            let title = data.query.search[i].title;
+            newLi.innerHTML += "<h3><a href='" + url + title + "'target='_blank'>" + title + "</a></h3>";
+            newLi.innerHTML += '<p>' + data.query.search[i].snippet;
+            resultsList.appendChild(newLi);
+        }
     }
+    
 }
 
 function hideElements(loc) {
@@ -58,14 +65,15 @@ function hideElements(loc) {
 }
 
 clearButton.addEventListener('click', function() {
-        if (resultsExist) {
-            //take out list elems
-            resultsList.innerHTML = ' ';
-            resultsExist = false;
-            hideElements(clearButton);     //hide clear button
-            searchbox.style.display = 'block';   //put the search box back on the page
-            searchEntered.value = null;          //clear the contents of the search box
-            mainWrapper.style.marginTop = '100px';
-            //move the position down
-        }
+    errorDiv.innerHTML="";
+    if (resultsExist) {
+        //take out list elems
+        resultsList.innerHTML = ' ';
+        resultsExist = false;
+        hideElements(clearButton);     //hide clear button
+        searchbox.style.display = 'block';   //put the search box back on the page
+        searchEntered.value = null;          //clear the contents of the search box
+        mainWrapper.style.marginTop = '100px';
+        //move the position down
+    }
 });

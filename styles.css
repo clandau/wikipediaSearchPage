@@ -83,3 +83,8 @@ input:focus {
    flex-flow: row wrap; 
   justify-content: space-around; 
 }     
+
+#error {
+    color: rgb(209, 51, 23);
+    align-content: right;
+}
