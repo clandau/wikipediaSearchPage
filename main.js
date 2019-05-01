@@ -55,10 +55,6 @@ function renderHTML(data) {
 
 function hideElements(loc) {
     loc.style.display === 'none' ? loc.style.display = 'block' : loc.style.display = 'none';
-    // if (loc.style.display === 'none') {
-    //     loc.style.display = 'block';
-    // }
-    //     loc.style.display = 'none';
 }
 
 clearButton.addEventListener('click', function() {
